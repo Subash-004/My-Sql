@@ -97,10 +97,21 @@ select * from employees;
 -- 2.	Write a trigger that inserts a new row into a "log" table whenever a record is deleted from the "orders" table.
 
 CREATE TABLE orders (
-    order_id INT PRIMARY KEY,
-    order_total DECIMAL(10, 2),
-    order_status VARCHAR(50)
-);
+    order_id INT,
+    customer_id varchar(10),
+    orders_name VARCHAR(20),
+    amount float,
+    order_date date,
+    primary key(customer_id));
+    
+
+insert into orders values (1001,2001,'karthi',1000,'2023-08-01');
+insert into orders values (1002,2002,'venu',2000,'2023-08-02');
+insert into orders values (1003,2003,'mari',3000,'2023-08-03');
+insert into orders values (1004,2004,'bose',4000,'2023-08-04');
+insert into orders values (1005,2005,'prem',5000,'2023-08-05');
+
+create table log(customer_id int,action varchar(30));
 
 
 DELIMITER //
@@ -108,21 +119,21 @@ create trigger log_order_deletion
 after delete on orders
 for each row
 begin
-  insert into orders ( order_id ,total_amount) values (1,20000);
-  insert into orders ( order_id ,total_amount) values (2,25000);
+   insert into log(customer_id,action) values (1234,'delete');
 end//
 DELIMITER ; 
+
+delete from orders where customer_id='3456';
+select* from orders;
+select * from  log;
 
 
 -- 3. Create a table called "transactions" with columns for "id" (primary key), "amount," and "timestamp." Create a trigger that updates the "balance" column in a "bank_accounts" table whenever a new transaction is inserted, considering the transaction amount (debit or credit).
 
-CREATE TABLE transactions (
-    id INT PRIMARY KEY,
-    amount DECIMAL(10, 2),
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    account_id INT
+CREATE TABLE bank_accounts (
+    account_num VARCHAR(20) PRIMARY KEY,
+    balance DECIMAL(10, 2)
 );
-
 
 DELIMITER //
 
@@ -130,14 +141,18 @@ CREATE TRIGGER update_balance_after_transaction
 AFTER INSERT ON transactions
 FOR EACH ROW
 BEGIN
-    
+    if new.amount>=0 then
     UPDATE bank_accounts
     SET balance = balance + NEW.amount
-    WHERE account_id = NEW.account_id;
+    WHERE account_num = 'BO12345';
+    else
+      UPDATE bank_accounts
+    SET balance = balance + NEW.amount
+    WHERE account_num = 'BO12345';
+    END IF;
 END//
 DELIMITER ;
 
-insert into transactions(id,amount,timestamp) values (1,5000,CURRENT_TIMESTAMP);
 
 -- 4.	Write a trigger that prevents inserting a new record into the "employees" table if the employee's age is less than 18.
 
