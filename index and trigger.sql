@@ -30,11 +30,15 @@ create index idx_title  on books(title,author,publication_year);
 select * from books
 where author = "J.R.R. Tolkien";
 
+create index idx_author on books (author);
+
 -- 3.	Add an index to the "publication_year" column in the "books" table and compare the query performance before and after adding the index.
 
  explain select * from books
  where publication_year ="1925";
- 
+
+  create index idx_year on books (publication_year);
+
  -- 4.	Create a table called "students" with columns for "id" (primary key), "name," "age," and "grade." Insert some sample data into the table.
  
  create table students (
@@ -56,6 +60,7 @@ insert into students values (5,"venu",24,"B");
 select * from students
 where grade ="A";
 
+create index idx_grade on students (grade); 
 
                                 -- Triggers --
                                 
