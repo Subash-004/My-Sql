@@ -34,12 +34,13 @@ SELECT ReverseString('Hello, World!') AS reversed_string;
 DELIMITER //
 
 CREATE FUNCTION CalculateAge(birthdate DATE) RETURNS INT
+deterministic	
 BEGIN
     DECLARE today DATE;
     DECLARE age INT;
     
     SET today = CURDATE();
-    SET age = YEAR(today) - YEAR(birthdate) - (RIGHT(today, 5) < RIGHT(birthdate, 5));
+    SET age = YEAR(today) - YEAR(birthdate);
     
     RETURN age;
 END;
