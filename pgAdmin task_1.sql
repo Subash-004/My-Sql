@@ -9,39 +9,41 @@
 	student_id int,
 		first_name text,
 		last_name text,
-		age int
+		age int,
+		primary key (student_id)
 	);
 	
+	-- drop table students;--
 	-- 2. Inserting Data: Insert a few rows of sample data into the "Students" table you created in the previous exercise.--
 	
 	
-	insert into students (student_id,first_name,last_name,age) values (1,'kamlesh','kumar',20);
+	insert into students (student_id,first_name,last_name,age) values (1,'kamlesh','kumar',20)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (2,'manoj','kumar',19);
+	insert into students (student_id,first_name,last_name,age) values (2,'manoj','kumar',19)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (3,'karthi','keyan',21);
+	insert into students (student_id,first_name,last_name,age) values (3,'karthi','keyan',21)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (4,'sai','ram',22);
+	insert into students (student_id,first_name,last_name,age) values (4,'sai','ram',22)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (5,'prem','kumar',18);
+	insert into students (student_id,first_name,last_name,age) values (5,'prem','kumar',18)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (6,'priya','dharshini',19);
+	insert into students (student_id,first_name,last_name,age) values (6,'priya','dharshini',19)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (7,'siva','kumar',23);
+	insert into students (student_id,first_name,last_name,age) values (7,'siva','kumar',23) returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (8,'vetri','vel',17);
+	insert into students (student_id,first_name,last_name,age) values (8,'vetri','vel',17)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (9,'anand','mani',26);
+	insert into students (student_id,first_name,last_name,age) values (9,'anand','mani',26)returning*
 	
-	insert into students (student_id,first_name,last_name,age) values (10,'naveen','kumar',24);
+	insert into students (student_id,first_name,last_name,age) values (10,'naveen','kumar',24)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (11,'haris','kumar',24);
+	insert into students (student_id,first_name,last_name,age) values (11,'haris','kumar',24)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (12,'sathees','kumar',24);
+	insert into students (student_id,first_name,last_name,age) values (12,'sathees','kumar',24)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (13,'pandi','sinthu',24);
+	insert into students (student_id,first_name,last_name,age) values (13,'pandi','sinthu',24)returning*;
 	
-	insert into students (student_id,first_name,last_name,age) values (14,'mani','subash',24);
+	insert into students (student_id,first_name,last_name,age) values (14,'mani','subash',24)returning*;
 	
 	select * from students;
 	
@@ -49,18 +51,24 @@
 	
 	-- a. Retrieve all the records from the "Students" table. --
 	
-	select * from students
-	where age >20;
+	select * from students;
+	
 	
 	-- b. Retrieve the first and last names of students whose age is greater than 20.--
 	
-	select count (*) from students;
+	select first_name,last_name
+	from students
+	where students.age>20;
+	
 	
 	--c. Count the number of students in the table. d. Retrieve the names of students in alphabetical order by their last names.--
 	
+	select count (*) AS students_count from students;
+	
+	-- . d. Retrieve the names of students in alphabetical order by their last names.--
 	select first_name,last_name
 	from students
-	order by last_name;
+	order by last_name ASC;
 	
 	-- 4.dating and Deleting Data: a. Update the age of a specific student in the "Students" table. b. Delete a student's record from the table based on their ID.
 	
@@ -193,6 +201,11 @@ WHERE student_id IN (SELECT student_id from studentCourses WHERE course_id IN
 	from students
 	where last_name like's%'
 	
+
+
+	 
+	
+	 
 
 
 	 
