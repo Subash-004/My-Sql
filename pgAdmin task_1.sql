@@ -180,7 +180,7 @@
 	from courses
 	join StudentCourses
 	on courses.course_id=StudentCourses.course_id
-	where StudentCourses.student_id=1;
+	where StudentCourses.student_id=student_id;
 	
 	--9.Subqueries: Retrieve the names of students who are enrolled in a course named "Mathematics."--
 	
